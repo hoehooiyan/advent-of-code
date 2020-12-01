@@ -1,4 +1,6 @@
-"""Day 1: Not Quite Lisp
+# ---Day 1: Not Quite Lisp---
+
+"""PART 1
 
 Santa was hoping for a white Christmas, but his weather machine's "snow" function is powered by stars, and he's fresh out! To save Christmas, he needs you to collect fifty stars by December 25th.
 
@@ -21,7 +23,9 @@ For example:
     ))) and )())()) both result in floor -3.
 
 To what floor do the instructions take Santa?
+
 """
+
 
 # Open the text file
 input_file = open('input.txt', 'r')
