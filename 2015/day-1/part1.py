@@ -1,29 +1,22 @@
 # Day 1: Not Quite Lisp
 # https://adventofcode.com/2015/day/1
 
-# Open the text file
-input_file = open("input.txt", "r")
+# Read from the input file
+with open("input.txt", "r") as fin:
+    data = fin.read()
 
-# Read data from the text file
-data = input_file.read()
+    # Convert a string of data into a list of instructions
+    instructions = list(data)
 
-# Close the text file
-input_file.close()
+    def final_position(instruction):
+        santa_position = 0
 
-# Convert a string of data into a list of instructions
-instructions = list(data)
+        for i in instruction:
+            if i == "(":
+                santa_position += 1
+            elif i == ")":
+                santa_position -= 1
 
+        print("Santa's final position: ", santa_position)
 
-def final_position(instruction):
-    santa_position = 0
-
-    for i in instruction:
-        if i == "(":
-            santa_position += 1
-        elif i == ")":
-            santa_position -= 1
-
-    print("Santa's final position: ", santa_position)
-
-
-final_position(instructions)
+    final_position(instructions)

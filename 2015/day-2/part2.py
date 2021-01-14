@@ -1,69 +1,53 @@
 # Day 2: I Was Told There Would Be No Math
 # https://adventofcode.com/2015/day/2
 
-# Open the text file
-input = open("input.txt")
+with open("input.txt", "r") as fin:
+    dimensions = []
 
-# Read data from the text file
-data = input.readlines()
+    for line in fin:
+        data = line.strip()
+        dimensions.append(data)
 
-# Close the text file
-input.close()
-
-# Convert the data into a list of dimensions
-dimensions = list(data)
-
-# New dimension list
-new_dimensions = [i[:-1] for i in dimensions]
-
-
-def perimeter(x, y):
-    return x + x + y + y
-
-
-def total_perimeter(dimensions):
-    total = 0
-
-    for item in dimensions:
-        after_splitting = item.split("x")
+    def get_single_value(combined_values):
+        after_splitting = combined_values.split("x")
 
         l = int(after_splitting[0])
         w = int(after_splitting[1])
         h = int(after_splitting[2])
 
-        max_num = max(l, w, h)
+        return (l, w, h)
 
-        if l == max_num:
-            p = perimeter(w, h)
-        elif w == max_num:
-            p = perimeter(l, h)
-        elif h == max_num:
-            p = perimeter(l, w)
+    def perimeter(x, y):
+        return x + x + y + y
 
-        total += p
+    def total_perimeter(dimensions):
+        total = 0
 
-    return total
+        for item in dimensions:
+            l, w, h = get_single_value(item)
+            max_num = max(l, w, h)
 
+            if l == max_num:
+                p = perimeter(w, h)
+            elif w == max_num:
+                p = perimeter(l, h)
+            elif h == max_num:
+                p = perimeter(l, w)
 
-def volume(dimensions):
-    total = 0
+            total += p
+        return total
 
-    for item in dimensions:
-        after_splitting = item.split("x")
+    def volume(dimensions):
+        total = 0
 
-        l = int(after_splitting[0])
-        w = int(after_splitting[1])
-        h = int(after_splitting[2])
+        for item in dimensions:
+            l, w, h = get_single_value(item)
+            result = l * w * h
+            total += result
+        return total
 
-        result = l * w * h
+    total1 = total_perimeter(dimensions)
+    total2 = volume(dimensions)
+    total_feet_ribbon = total1 + total2
 
-        total += result
-
-    return total
-
-
-total1 = total_perimeter(new_dimensions)
-total2 = volume(new_dimensions)
-total_feet_ribbon = total1 + total2
-
-print(total_feet_ribbon)
+    print(total_feet_ribbon)

@@ -1,43 +1,34 @@
 # Day 3: Perfectly Spherical Houses in a Vacuum
 # https://adventofcode.com/2015/day/3
 
-# Open the text file
-input = open("input.txt")
+with open("input.txt", "r") as fin:
+    data = fin.read()
+    moves = list(data)  # Convert str to list
+    new_moves = moves[:-1]  # Get the last move
 
-# Read data from the text file
-data = input.read()
+    x, y = starting_location = [0, 0]
+    all_houses = []
+    visited_location = [starting_location]
 
-# Close the text file
-input.close()
+    def add_house(coordinate_x, coordinate_y):
+        all_houses.append([coordinate_x, coordinate_y])
 
-# Convert the data into a list
-moves = list(data)
-new_moves = moves[:-1]
+    for move in new_moves:
+        if move == "^":
+            y += 1
+            add_house(x, y)
+        elif move == "v":
+            y -= 1
+            add_house(x, y)
+        elif move == "<":
+            x -= 1
+            add_house(x, y)
+        elif move == ">":
+            x += 1
+            add_house(x, y)
 
-final_location = [0, 0]
-x = final_location[0]
-y = final_location[1]
-all_houses = []
-visited_location = [[0, 0]]
+    for i in all_houses:
+        if i not in visited_location:
+            visited_location.append(i)
 
-
-for move in new_moves:
-    if move == "^":
-        y += 1
-        all_houses.append([x, y])
-    elif move == "v":
-        y -= 1
-        all_houses.append([x, y])
-    elif move == "<":
-        x -= 1
-        all_houses.append([x, y])
-    elif move == ">":
-        x += 1
-        all_houses.append([x, y])
-
-
-for i in all_houses:
-    if i not in visited_location:
-        visited_location.append(i)
-
-print(len(visited_location))
+    print(len(visited_location))
