@@ -1,20 +1,8 @@
-# ---Day 1: Not Quite Lisp---
-
-"""PART 2
-
-Now, given the same instructions, find the position of the first character that causes him to enter the basement (floor -1). The first character in the instructions has position 1, the second character has position 2, and so on.
-
-For example:
-
-    ) causes him to enter the basement at character position 1.
-    ()()) causes him to enter the basement at character position 5.
-
-What is the position of the character that causes Santa to first enter the basement?
-
-"""
+# Day 1: Not Quite Lisp
+# https://adventofcode.com/2015/day/1
 
 # Open the text file
-input_file = open('input.txt', 'r')
+input_file = open("input.txt", "r")
 
 # Read data from the text file
 data = input_file.read()
@@ -31,16 +19,19 @@ def final_position(instruction):
     first_char = 1
 
     for i in instruction:
-        if i == '(':
+        if i == "(":
             santa_position += 1
-        elif i == ')':
+        elif i == ")":
             santa_position -= 1
         if santa_position == -1:
             break
 
         first_char += 1
 
-    print('The position of the character causes Santa to first enter the basement: ', first_char)
+    print(
+        "The position of the character causes Santa to first enter the basement: ",
+        first_char,
+    )
 
 
 final_position(instructions)
